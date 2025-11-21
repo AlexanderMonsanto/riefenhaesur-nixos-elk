@@ -176,6 +176,8 @@ jobs:
           cp .env.example .env
           echo "KIBANA_ES_USER=elastic" >> .env
           echo "LOGSTASH_ES_USER=elastic" >> .env
+          echo "ES_JAVA_OPTS=-Xms1g -Xmx1g" >> .env
+          echo "LS_JAVA_OPTS=-Xms512m -Xmx512m" >> .env
           mkdir -p certs secrets/wireguard
       
       - name: Generate test certificates
@@ -194,7 +196,7 @@ jobs:
       
       - name: Wait for Kibana
         run: |
-          timeout 300 bash -c 'until curl -s -u elastic:changeme http://localhost:5601/api/status | grep -q "available"; do sleep 5; done'
+          timeout 300 bash -c 'until curl -s -u elastic:changeme http://localhost:5601/api/status | grep -q "available"; do echo "Waiting for Kibana..."; sleep 5; done' || (echo "Kibana timed out. Last response:" && curl -s -u elastic:changeme http://localhost:5601/api/status && exit 1)
       
       - name: Wait for Prometheus
         run: |
