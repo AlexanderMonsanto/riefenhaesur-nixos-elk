@@ -1,18 +1,13 @@
 # Installation Guide
 
 ## Prerequisites
-- Docker 20.10+
-- Docker Compose 2.0+
-- 4GB RAM minimum
-- 50GB disk space
+- Docker & Docker Compose
+- NixOS (for clients)
+- SOPS & Age (for secrets)
 
-## Quick Install
-```bash
-git clone https://github.com/AlexanderMonsanto/reifenhaeuser-nixos-elk.git
-cd reifenhaeuser-nixos-elk
-make setup
-make up
-```
-
-## Detailed Steps
-See main README.md for complete instructions.
+## Steps
+1. Clone the repository.
+2. Run `./scripts/setup.sh` to initialize secrets and certificates.
+3. Encrypt secrets using SOPS.
+4. Run `docker-compose up -d` to start the server stack.
+5. Deploy NixOS clients using the flake.

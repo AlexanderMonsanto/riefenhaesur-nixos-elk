@@ -1,0 +1,11 @@
+{{ define "email.default.subject" }}{{ .Status | toUpper }} - {{ .CommonLabels.alertname }}{{ end }}
+{{ define "email.default.html" }}
+<html>
+<body>
+<strong>Alert:</strong> {{ .CommonLabels.alertname }}<br>
+<strong>Status:</strong> {{ .Status }}<br>
+<strong>Summary:</strong> {{ .CommonAnnotations.summary }}<br>
+<strong>Description:</strong> {{ .CommonAnnotations.description }}<br>
+</body>
+</html>
+{{ end }}

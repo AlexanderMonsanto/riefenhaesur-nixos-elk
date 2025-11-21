@@ -1,17 +1,14 @@
-# Troubleshooting Guide
+# Troubleshooting
 
 ## Common Issues
 
-### Elasticsearch won't start
-- Check vm.max_map_count: `sysctl vm.max_map_count`
-- Should be at least 262144
-- Fix: `sudo sysctl -w vm.max_map_count=262144`
+### Elasticsearch not starting
+Check `vm.max_map_count`. Run `sysctl -w vm.max_map_count=262144`.
 
-### Services can't connect
-- Verify Docker network: `docker network ls`
-- Check firewall rules
-- Review logs: `make logs`
+### Client connection failed
+Check WireGuard status: `sudo wg show`.
+Check firewall logs.
 
-## Getting Help
-- GitHub Issues: <repo-url>/issues
-- Documentation: docs/
+### Certificate errors
+Ensure CA certificate is installed on the client machine or browser.
+Regenerate certificates using `./scripts/generate-certs.sh` if expired.

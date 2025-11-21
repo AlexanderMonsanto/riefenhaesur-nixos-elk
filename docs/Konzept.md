@@ -5,7 +5,7 @@ docs/KONZEPT.md
 ## 📁 Directory Structure
 
 ```
-industrial-monitoring-stack/
+riefenhaeuser-nixos-elk/
 ├── README.md                          # Main documentation
 ├── LICENSE                            # MIT License
 ├── .gitignore                         # Git ignore rules
