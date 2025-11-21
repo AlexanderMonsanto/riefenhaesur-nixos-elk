@@ -95,7 +95,7 @@ jobs:
       
       - name: Validate Docker Compose
         run: |
-          docker-compose config > /dev/null
+          docker compose config > /dev/null
           echo "✅ Docker Compose syntax is valid"
       
       - name: Check Bash scripts
@@ -152,13 +152,13 @@ jobs:
       - name: Build images (pull_request)
         if: github.event_name == 'pull_request'
         run: |
-          docker-compose build
+          docker compose build
       
       - name: Build and push images (push)
         if: github.event_name == 'push'
         run: |
-          docker-compose build
-          docker-compose push || true
+          docker compose build
+          docker compose push || true
 
   # ============================================================================
   # Integration Tests
@@ -185,7 +185,7 @@ jobs:
       
       - name: Start services
         run: |
-          docker-compose up -d
+          docker compose up -d
           sleep 60  # Wait for services to be ready
       
       - name: Wait for Elasticsearch
@@ -207,7 +207,7 @@ jobs:
       - name: Run health checks
         run: |
           chmod +x scripts/health-check.sh
-          ./scripts/health-check.sh || docker-compose logs
+          ./scripts/health-check.sh || docker compose logs
       
       - name: Test Prometheus targets
         run: |
@@ -226,7 +226,7 @@ jobs:
       - name: Collect logs on failure
         if: failure()
         run: |
-          docker-compose logs > /tmp/docker-logs.txt
+          docker compose logs > /tmp/docker-logs.txt
       
       - name: Upload logs
         if: failure()
@@ -238,7 +238,7 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          docker-compose down -v
+          docker compose down -v
 
   # ============================================================================
   # NixOS Configuration Check
@@ -380,7 +380,7 @@ jobs:
       
       - name: Docker image scanning
         run: |
-          docker-compose config | grep 'image:' | awk '{print $2}' | sort -u | while read img; do
+          docker compose config | grep 'image:' | awk '{print $2}' | sort -u | while read img; do
             echo "Scanning $img"
             trivy image "$img"
           done
