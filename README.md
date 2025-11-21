@@ -142,8 +142,8 @@ Die manuelle Überwachung von ExtrusionOS/Spectre-Systemen über mehrere Kundens
 ### 1. Repository klonen
 
 ```bash
-git clone https://github.com/yourusername/industrial-monitoring-stack.git
-cd industrial-monitoring-stack
+git clone https://github.com/AlexanderMonsanto/reifenhaeuser-nixos-elk.git
+cd reifenhaeuser-nixos-elk
 ```
 
 ### 2. Secrets generieren

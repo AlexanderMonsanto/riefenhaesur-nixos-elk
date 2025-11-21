@@ -8,8 +8,8 @@
 
 ## Quick Install
 ```bash
-git clone <repo-url>
-cd industrial-monitoring-stack
+git clone https://github.com/AlexanderMonsanto/reifenhaeuser-nixos-elk.git
+cd reifenhaeuser-nixos-elk
 make setup
 make up
 ```
