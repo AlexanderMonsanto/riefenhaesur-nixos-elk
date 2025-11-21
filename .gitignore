@@ -1,0 +1,340 @@
+# Industrial Monitoring Stack - .gitignore
+# SECURITY: Never commit secrets, keys, or credentials!
+
+##############################################################################
+# CRITICAL: Secrets and Keys - NEVER COMMIT THESE
+##############################################################################
+
+# Environment files with passwords
+.env
+.env.local
+.env.*.local
+*.env
+
+# SOPS/Age encryption keys
+secrets/age-key.txt
+secrets/age-*.txt
+secrets/*-key.txt
+
+# Plaintext secrets (should be encrypted with SOPS)
+secrets/*-plaintext.yaml
+secrets/*-plaintext.yml
+secrets/plaintext/
+
+# Private keys
+*.key
+*.pem
+!certs/.gitkeep
+
+# WireGuard keys
+secrets/wireguard/*.key
+*-private.key
+*-private.pem
+
+# TLS/SSL certificates and keys
+certs/*.key
+certs/*.pem
+certs/*.p12
+certs/*.pfx
+certs/*.crt
+certs/*.csr
+certs/ca.key
+certs/server.key
+certs/client*.key
+!certs/.gitkeep
+
+# Password files
+*password*.txt
+*passwd*.txt
+credentials.txt
+
+# API keys and tokens
+*api-key*
+*api_key*
+*token*.txt
+
+##############################################################################
+# Data and Logs - Don't commit runtime data
+##############################################################################
+
+# Docker volumes and data
+volumes/
+data/
+**/data/
+elasticsearch-data/
+prometheus-data/
+grafana-data/
+logstash-data/
+
+# Logs
+*.log
+logs/
+*.log.*
+log/
+!logs/.gitkeep
+
+# Backups
+backups/
+backup/
+*.backup
+*.bak
+*.tar.gz
+*.zip
+dump/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+.cache/
+
+##############################################################################
+# Operating System Files
+##############################################################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+##############################################################################
+# Development Tools
+##############################################################################
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Editors
+*~
+*.swp
+*.swo
+.*.swp
+.*.swo
+*.bak
+.vimrc.local
+
+##############################################################################
+# Build artifacts and dependencies
+##############################################################################
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+##############################################################################
+# Docker
+##############################################################################
+
+# Docker override files (if you use them for local dev)
+docker-compose.override.yml
+docker-compose.local.yml
+
+##############################################################################
+# NixOS
+##############################################################################
+
+# Build results
+result
+result-*
+
+# Nix build outputs
+/result/
+
+##############################################################################
+# Test Coverage and Reports
+##############################################################################
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Test outputs
+test-results/
+test-output/
+
+##############################################################################
+# Documentation Build
+##############################################################################
+
+# Sphinx documentation
+docs/_build/
+site/
+
+# MkDocs
+site/
+
+##############################################################################
+# Terraform (if using)
+##############################################################################
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude all .tfvars files with secrets
+*.tfvars
+
+# Ignore override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+##############################################################################
+# Kubernetes (if using)
+##############################################################################
+
+# kubectl local config
+kubeconfig
+*.kubeconfig
+.kube/
+
+##############################################################################
+# Monitoring Stack Specific
+##############################################################################
+
+# Grafana
+config/grafana/grafana.db
+
+# Prometheus data
+prometheus_data/
+
+# Elasticsearch snapshots
+snapshots/
+
+# Certificate signing requests (CSRs) - regenerate as needed
+*.csr
+
+##############################################################################
+# Project-Specific
+##############################################################################
+
+# Local configuration overrides
+*local.yml
+*local.yaml
+*.local.conf
+
+# Personal notes
+NOTES.md
+TODO.md
+personal/
+
+##############################################################################
+# Keep these directories (but not their contents)
+##############################################################################
+
+# Keep directory structure but ignore contents
+!certs/.gitkeep
+!logs/.gitkeep
+!backups/.gitkeep
+!secrets/.gitkeep
+!data/.gitkeep
+
+##############################################################################
+# Whitelist (files to ALWAYS include even if matched above)
+##############################################################################
+
+# Encrypted secrets (SOPS encrypted) - these are SAFE to commit
+!secrets/secrets.yaml
+!secrets/*.enc.yaml
+
+# Example/template files
+!.env.example
+!secrets.example.yaml
+
+# Documentation
+!README.md
+!docs/**/*.md
+!CONTRIBUTING.md
+!LICENSE
+
+# Configuration templates
+!config/**/*.example.*
+!config/**/*.template.*.
