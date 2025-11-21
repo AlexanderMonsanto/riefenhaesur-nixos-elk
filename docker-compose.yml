@@ -71,7 +71,7 @@ services:
     environment:
       - "LS_JAVA_OPTS=-Xms1g -Xmx1g"
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=logstash_system
+      - ELASTICSEARCH_USERNAME=${LOGSTASH_ES_USER:-logstash_system}
       - ELASTICSEARCH_PASSWORD=${LOGSTASH_SYSTEM_PASSWORD}
     volumes:
       - ./config/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro

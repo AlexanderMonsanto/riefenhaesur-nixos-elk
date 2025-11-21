@@ -175,6 +175,7 @@ jobs:
         run: |
           cp .env.example .env
           echo "KIBANA_ES_USER=elastic" >> .env
+          echo "LOGSTASH_ES_USER=elastic" >> .env
           mkdir -p certs secrets/wireguard
       
       - name: Generate test certificates

@@ -34,6 +34,9 @@ scrape_configs:
         labels:
           service: 'elasticsearch'
     metrics_path: '/_prometheus/metrics'
+    basic_auth:
+      username: 'elastic'
+      password: 'changeme'
 
   # Kibana
   - job_name: 'kibana'

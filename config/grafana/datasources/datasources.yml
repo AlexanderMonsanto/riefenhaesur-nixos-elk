@@ -20,4 +20,7 @@ datasources:
       esVersion: "7.10.0"
       logMessageField: message
       logLevelField: level
+    basicAuth: true
+    basicAuthUser: elastic
+    basicAuthPassword: changeme
     editable: true
