@@ -71,24 +71,56 @@ curl -sfL https://get.k3s.io | sh -
 
 ## 🚀 Quick Start
 
+## 🚀 Quick Start
+
 ### 1. Create Secrets
 
-**Option A: Manual**
+⚠️ **IMPORTANT: Secrets are NOT included in the repository for security!**
+
+**Option A: Generate Automatically (Recommended)**
 ```bash
-# Edit the secrets file
-cp k8s/secrets/secrets.yaml k8s/secrets/secrets-local.yaml
-# Edit secrets-local.yaml with your passwords
-kubectl apply -f k8s/secrets/secrets-local.yaml
+# Run the secret generation script
+./scripts/generate-k8s-secrets.sh
+
+# This creates k8s/secrets/secrets.yaml with random passwords
+# Save the displayed credentials securely!
 ```
 
-**Option B: SOPS (Recommended)**
+**Option B: Manual Creation**
 ```bash
-# Encrypt secrets
+# Copy the template
+cp k8s/secrets/secrets.yaml.example k8s/secrets/secrets.yaml
+
+# Generate random passwords
+openssl rand -base64 32
+
+# Edit with your passwords
+vim k8s/secrets/secrets.yaml
+
+# Apply to cluster
+kubectl apply -f k8s/secrets/secrets.yaml
+```
+
+**Option C: SOPS Encryption (Production)**
+```bash
+# Create secrets file
+cp k8s/secrets/secrets.yaml.example k8s/secrets/secrets.yaml
+vim k8s/secrets/secrets.yaml
+
+# Encrypt with SOPS
 sops -e k8s/secrets/secrets.yaml > k8s/secrets/secrets.enc.yaml
 
-# Decrypt and apply
+# Commit encrypted version (safe)
+git add k8s/secrets/secrets.enc.yaml
+
+# Deploy (decrypt and apply)
 sops -d k8s/secrets/secrets.enc.yaml | kubectl apply -f -
 ```
+
+> [!WARNING]
+> **Never commit `secrets.yaml` to git!** Only commit `secrets.yaml.example` (template) or `*.enc.yaml` (SOPS encrypted).
+
+See [k8s/secrets/README.md](secrets/README.md) for detailed security guidance.
 
 ### 2. Deploy the Stack
 

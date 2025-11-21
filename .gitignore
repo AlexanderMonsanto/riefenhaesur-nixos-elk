@@ -339,3 +339,9 @@ personal/
 !config/**/*.example.*
 !config/**/*.template.*.# Kubernetes local secrets
 k8s/secrets/secrets-local.yaml
+k8s/secrets/secrets.yaml
+k8s/secrets/*.enc.yaml
+
+# SOPS encrypted files (keep .example files)
+secrets/secrets.yaml
+!secrets/secrets.yaml.example

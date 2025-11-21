@@ -3,9 +3,14 @@ kind: Kustomization
 
 namespace: monitoring
 
+# NOTE: Create secrets manually before deploying
+# See k8s/secrets/README.md for instructions
+# Uncomment after creating secrets.yaml:
+# resources:
+#   - secrets/secrets.yaml
+
 resources:
   - namespace.yaml
-  - secrets/secrets.yaml
   - configmaps/elasticsearch-config.yaml
   - configmaps/kibana-config.yaml
   - configmaps/logstash-config.yaml
