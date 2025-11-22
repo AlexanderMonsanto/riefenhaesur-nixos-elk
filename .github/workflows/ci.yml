@@ -178,6 +178,9 @@ jobs:
           echo "LOGSTASH_ES_USER=elastic" >> .env
           echo "ES_JAVA_OPTS=-Xms1g -Xmx1g" >> .env
           echo "LS_JAVA_OPTS=-Xms512m -Xmx512m" >> .env
+          echo "KIBANA_ENCRYPTION_KEY=$(openssl rand -base64 32)" >> .env
+          echo "KIBANA_SECURITY_KEY=$(openssl rand -base64 32)" >> .env
+          echo "KIBANA_REPORTING_KEY=$(openssl rand -base64 32)" >> .env
           mkdir -p certs secrets/wireguard
       
       - name: Generate test certificates
